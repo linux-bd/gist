@@ -1,2 +1,2 @@
-# gists
-Linux Issues and Utility Commands for Different Distros
+# Gist
+Linux Issues and Utility Commands
