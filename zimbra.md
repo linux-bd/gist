@@ -87,7 +87,7 @@ Inside container:
 * Hostname → `mail.primary.test`
 * Domain → `primary.test`
 * Admin user → `admin@primary.test`
-* Admin password → (choose strong password)
+* Admin password → (choose strong password)  → `adminpass`
 
 **Important**: Don’t type `yes` — that creates domain `yes` (like in your test). Always enter `primary.test`.
 
@@ -122,8 +122,8 @@ From Windows browser:
 https://mail.primary.test:7071/zimbraAdmin/
 ```
 
-* Login: `admin@primary.test`
-* Password: the one you set during setup
+* Login: `admin@mail.primary.test`
+* Password: `adminpass`
 
 ---
 
@@ -158,7 +158,7 @@ zmprov ca user1@primary.test user1pass
 ### Change password
 
 ```bash
-zmprov sp user1@primary.test newpass123
+zmprov sp user1@primary.test user1pass
 ```
 
 ### List all accounts
@@ -204,8 +204,8 @@ zmprov ma user1@primary.test zimbraIsAdminAccount TRUE
 
 ## ✅ End Result
 
-* Admin: `admin@primary.test` → login at **[https://mail.primary.test:7071](https://mail.primary.test:7071)**
-* Users: `user1@primary.test` → login at **[https://mail.primary.test:8443](https://mail.primary.test:8443)**
+* Admin: `admin@mail.primary.test` `adminpass` → login at **[https://mail.primary.test:7071](https://mail.primary.test:7071)**
+* Users: `user1@primary.test` `user1pass` → login at **[https://mail.primary.test:8443](https://mail.primary.test:8443)**
 * Multiple domains supported: `primary.test`, `secondary.test`, etc.
 * Fully functional **mail server simulation** inside WSL2 + Docker.
 
