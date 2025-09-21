@@ -152,13 +152,13 @@ zmprov cd secondary.test
 ### Create a user
 
 ```bash
-zmprov ca user1@primary.test user1pass
+zmprov ca user1@mail.primary.test user1pass
 ```
 
 ### Change password
 
 ```bash
-zmprov sp user1@primary.test user1pass
+zmprov sp user1@mail.primary.test user1pass
 ```
 
 ### List all accounts
@@ -170,7 +170,7 @@ zmprov -l gaa
 ### Grant admin rights
 
 ```bash
-zmprov ma user1@primary.test zimbraIsAdminAccount TRUE
+zmprov ma user1@mail.primary.test zimbraIsAdminAccount TRUE
 ```
 
 ---
@@ -205,7 +205,7 @@ zmprov ma user1@primary.test zimbraIsAdminAccount TRUE
 ## ✅ End Result
 
 * Admin: `admin@mail.primary.test` `adminpass` → login at **[https://mail.primary.test:7071](https://mail.primary.test:7071)**
-* Users: `user1@primary.test` `user1pass` → login at **[https://mail.primary.test:8443](https://mail.primary.test:8443)**
+* Users: `user1@mail.primary.test` `user1pass` → login at **[https://mail.primary.test:8443](https://mail.primary.test:8443)**
 * Multiple domains supported: `primary.test`, `secondary.test`, etc.
 * Fully functional **mail server simulation** inside WSL2 + Docker.
 
