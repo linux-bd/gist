@@ -151,3 +151,28 @@ https://mail.primary.test:7071    → Admin Console
 * Self-signed certificate deployed
 * Windows trusts CA → browser shows **green padlock**
 * Access via hostname `mail.primary.test` → no warnings
+
+
+## Zimbra Credentials 🔐📧
+
+```
+zimadmin
+0
+```
+
+---
+
+### 🛠️ **Admin panel**
+
+* 🌐 **URL:** [https://mail.primary.test:7071/zimbraAdmin/](https://mail.primary.test:7071/zimbraAdmin/)
+* 👤 **User:** `admin@mail.primary.test`
+* 🔑 **Pass:** `adminpass`
+
+---
+
+### 🧑‍💻 **User panel**
+
+* 🌐 **URL:** [https://mail.primary.test/#1](https://mail.primary.test/#1)
+* 👤 **User:** `admin@mail.primary.test`
+* 🔑 **Pass:** `adminpass`
+
