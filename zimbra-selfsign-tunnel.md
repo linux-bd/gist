@@ -168,6 +168,8 @@ zimadmin
 * 👤 **User:** `admin@mail.primary.test`
 * 🔑 **Pass:** `adminpass`
 
+---
+
 ## ** Tunneling **
 
 ```
