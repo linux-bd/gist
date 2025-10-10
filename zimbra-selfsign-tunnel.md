@@ -168,6 +168,13 @@ zimadmin
 * 👤 **User:** `admin@mail.primary.test`
 * 🔑 **Pass:** `adminpass`
 
+## ** Tunneling **
+
+```
+ngrok authtoken <YOUR_AUTHTOKEN>
+ngrok http https://192.168.49.128:443 --host-header="mail.primary.test"
+```
+
 ---
 
 ✅ **Result:**
