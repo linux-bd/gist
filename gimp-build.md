@@ -107,5 +107,3 @@ ninja -C build install
 - No system pollution
 - Easy to update
 - Works reliably for development
-
-Would you like me to also make a **one-file script** that automates the whole process (clone + dependencies + build)?
