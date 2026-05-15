@@ -1,109 +1,82 @@
-## How to Build GIMP 3.3 from Source Locally on Ubuntu (Clean & Reliable Method
+## How to Build and Install GIMP 3.3 from Source System-Wide on Ubuntu
 
-### 1. Install Dependencies (Ubuntu/Debian)
+### 1. Install Dependencies
 
 ```bash
 sudo apt update
-sudo apt install -y \
-    meson ninja-build git \
-    libgtk-3-dev libbabl-dev libgegl-dev \
-    libgexiv2-dev libexiv2-dev librsvg2-dev \
-    libtiff-dev libpoppler-glib-dev libarchive-dev \
-    libmypaint-dev mypaint-brushes libxmu-dev \
-    xsltproc libatk1.0-dev cmake \
-    liblcms2-dev libjson-glib-dev libwebp-dev \
-    libheif-dev libjpeg-dev libpng-dev
+sudo apt install -y meson ninja-build git cmake \
+    libgtk-3-dev libbabl-dev libgegl-dev libgexiv2-dev \
+    librsvg2-dev libtiff-dev libpoppler-glib-dev libarchive-dev \
+    libmypaint-dev mypaint-brushes libxmu-dev xsltproc \
+    liblcms2-dev libjson-glib-dev libwebp-dev libheif-dev
 ```
 
-### 2. Clone GIMP
-
-```bash
-cd ~/dev
-git clone https://github.com/GNOME/gimp.git --depth=1
-git submodule update --init --recursive
-cd gimp
-```
-
-### 3. Build babl and gegl (Very Important)
+### 2. Clone babl, gegl & gimp
 
 ```bash
 cd ~/dev
 
 git clone https://gitlab.gnome.org/GNOME/babl.git
 git clone https://gitlab.gnome.org/GNOME/gegl.git
+git clone https://github.com/GNOME/gimp.git --depth=1
+git submodule update --init --recursive
 
-# Build babl
-cd ~/dev/babl
-meson setup _build --prefix=$HOME/dev/gimp/_install --reconfigure
-ninja -C _build install
-
-# Build gegl
-cd ~/dev/gegl
-meson setup _build --prefix=$HOME/dev/gimp/_install --reconfigure
-ninja -C _build install
+cd gimp
 ```
 
-### 4. Build and Install GIMP locally
+### 3. Build & Install babl + gegl System-Wide
+
+```bash
+# babl
+cd ~/dev/babl
+meson setup _build --prefix=/usr/local --reconfigure
+ninja -C _build
+sudo ninja -C _build install
+
+# gegl
+cd ~/dev/gegl
+meson setup _build --prefix=/usr/local --reconfigure
+ninja -C _build
+sudo ninja -C _build install
+```
+
+### 4. Build & Install GIMP System-Wide
 
 ```bash
 cd ~/dev/gimp
 
-# Configure with local install prefix
-meson setup build --prefix=$(pwd)/_install --reconfigure
-
-# Build
+meson setup build --prefix=/usr/local --reconfigure
 ninja -C build
-
-# Install
-ninja -C build install
+sudo ninja -C build install
 ```
 
-### 5. Create Run Script (`run-gimp.sh`)
+### 5. Final Step
 
 ```bash
-cat > run-gimp.sh << 'EOF'
-#!/bin/bash
-ROOT=$(pwd)
-
-export LD_LIBRARY_PATH="${ROOT}/_install/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}"
-export PATH="${ROOT}/_install/bin:${PATH}"
-
-export GIMP3_DATADIR="${ROOT}/_install/share/gimp/3.0"
-export GIMP3_SYSCONFDIR="${ROOT}/_install/etc/gimp/3.0"
-export GIMP3_LOCALEDIR="${ROOT}/_install/share/locale"
-
-exec ./_install/bin/gimp-3.3 "$@"
-EOF
-
-chmod +x run-gimp.sh
-```
-
-### 6. Run GIMP
-
-```bash
-./run-gimp.sh
+sudo ldconfig
+gimp-3.3
 ```
 
 ---
 
-### Future Updates (Quick Commands)
+### Useful Commands
+
+- **Run GIMP**: `gimp-3.3`
+- **Check version**: `gimp-3.3 --version`
+- **Update later** (when you pull new code):
 
 ```bash
+cd ~/dev/babl && ninja -C _build && sudo ninja -C _build install
+cd ~/dev/gegl && ninja -C _build && sudo ninja -C _build install
 cd ~/dev/gimp
 git pull
-cd ~/dev/babl && ninja -C _build install
-cd ~/dev/gegl && ninja -C _build install
-cd ~/dev/gimp
 meson setup build --reconfigure
 ninja -C build
-ninja -C build install
-./run-gimp.sh
+sudo ninja -C build install
+sudo ldconfig
+gimp-3.3
 ```
 
 ---
 
-**This method gives you:**
-- A clean local install in `_install` folder
-- No system pollution
-- Easy to update
-- Works reliably for development
+This method installs GIMP into `/usr/local/bin` and `/usr/local/lib`, making it available system-wide like a normal application.
